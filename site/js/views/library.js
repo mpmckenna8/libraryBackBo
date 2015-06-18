@@ -22,6 +22,8 @@ app.LibraryView = Backbone.View.extend({
   //dfkd
 	addBook: function( e ) {
 
+		console.log('at least tried')
+
     var decollect = this.collection;
 
     console.log(this.collection)
@@ -32,12 +34,14 @@ app.LibraryView = Backbone.View.extend({
     var fitoload = document.getElementById("coverImage").files;
 
 
-
 		var formData = {};
 
-		$( '#addBook div' ).children( 'input' ).each( function( i, el ) {
+		$( '#addarea' ).children( 'input' ).each( function( i, el ) {
+			console.log('get the childrens')
+
 			if( $( el ).val() != "" )
 			{
+				console.log('got some val ',  $( el ).val())
 				if( el.id === 'keywords' ) {
 					formData[ el.id ] = [];
 					_.each( $( el ).val().split( ' ' ), function( keyword ) {
@@ -46,6 +50,12 @@ app.LibraryView = Backbone.View.extend({
 				} else if( el.id === 'releaseDate' ) {
 					formData[ el.id ] = $( '#releaseDate' ).datepicker( 'getDate' ).getTime();
 				}
+				else if (el.id === "mailer"){
+					console.log($("#mailer"))
+
+					formData[el.id] = $("#mailer").val()
+				}
+
         else if (el.id === "coverImage")
         {
 
@@ -54,9 +64,10 @@ app.LibraryView = Backbone.View.extend({
               console.log(document.getElementById("coverImage").files[0])
               console.log($("#coverImage")[0].files)
               var pepy =$("#coverImage")[0].files[0];
-               var reader = new FileReader();
+              var reader = new FileReader();
 
-               reader.readAsArrayBuffer(pepy)
+								//would probably be ideal to use readAsArrayBuffer especially to store in mongo and transfer but whatevs for here
+               reader.readAsDataURL(pepy)
 
                reader.onload = function(fibuf){
                  console.log(fibuf);
@@ -66,34 +77,49 @@ app.LibraryView = Backbone.View.extend({
                  dosave(formData);
 
                };
-
-
          }
-         else{
-           fiload = true;
-         }
-
 
         }
+				else if (el.id === "urlimager"){
+						if($(el).val()){
+							console.log($(el).val())
+							formData.coverImage = $(el).val()
+						}
+					}
         else {
 
 					formData[ el.id ] = $( el ).val();
 				}
+			console.log('going through form')
+
 			}
+
+
+
+
 		});
+		if(fitoload.length === 0){
+			console.log('saving here')
+			dosave( formData );
+		}
 
 
 
-    if(fitoload.length === 0){
-
-  		dosave( formData );
-      fiload = false;
-
-  }
 function dosave(doc){
 
   decollect.create(doc)
+
+
+	$( '#addBook div' ).children( 'input' ).each( function( i, el ) {
+		$(el).val('')
+
+	})
+
+	$("#addarea")
+		.css("display", 'none');
+
 }
+
 	},
 
 	// render library by rendering each book in its collection
@@ -110,7 +136,12 @@ function dosave(doc){
 			model: item
 		});
 		this.$el.append( bookView.render().el );
+	},
+
+	disAddBook: function(){
+
 	}
+
 });
 
 

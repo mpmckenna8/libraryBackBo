@@ -22,6 +22,7 @@ var Book = new mongoose.Schema({
 	author: String,
 	releaseDate: String,
   coverImage: String,
+	mailer:String,
 
 	keywords: [ Keywords ]
 });
@@ -88,7 +89,8 @@ app.post( '/api/books', function( request, response ) {
 		author: request.body.author,
 		releaseDate: request.body.releaseDate,
 		keywords: request.body.keywords,
-    coverImage: request.body.coverImage
+    coverImage: request.body.coverImage,
+		mailer: request.body.mailer
 	});
 
 	book.save( function( err ) {
@@ -99,6 +101,8 @@ app.post( '/api/books', function( request, response ) {
 		}
 		return response.send( book );
 	});
+
+response.send('hogwash')
 });
 
 //Update a book
@@ -112,6 +116,7 @@ app.put( '/api/books/:id', function( request, response ) {
 		book.releaseDate = request.body.releaseDate;
 		book.keywords = request.body.keywords;
     book.coverImage = request.body.coverImage;
+		book.mailer = request.body.mailer;
 
 		return book.save( function( err ) {
 			if( !err ) {

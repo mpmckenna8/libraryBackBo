@@ -9,29 +9,43 @@
     </head>
     <body>
       <div id="books">
-        <form id="addBook" action="#">
-          <div id="abook">Add a new book </div>
+
+        <div id="addBook" action="#">
+          <h3 id="abook">Add a new book </h3>
             <div id="addarea">
 
                 <label for="coverImage">
                   CoverImage:
                 </label>
+                <input id="urlimager" type="text" placeholder="URL for image (link)" ></input>
+                   <label for="coverImage" >
+                     or Add image from file:
+                   </label>
+
                   <input id="coverImage" type="file"  />
+
+
 
                 <label for="title">Title: </label><input id="title" type="text" />
                 <label for="author">Author: </label><input id="author" type="text" />
                 <label for="releaseDate">Release date: </label><input id="releaseDate" type="text" />
                 <label for="keywords">Keywords: </label><input id="keywords" type="text" />
+
+                <label for="mailer" id="elab">Your e-mail: </label>
+                <input id="mailer" type="email" />
                 <button id="add">Add</button>
             </div>
 
-        </form>
+        </div>
+
+
+
       </div>
 
 
 
       <script id="bookTemplate" type="text/template">
-        <img height=30 width=20 src="<%= coverImage %>"/>
+        <img height=115 width=90 src="<%= coverImage %>"/>
         <ul>
             <li><%= title %></li>
             <li><%= author %></li>

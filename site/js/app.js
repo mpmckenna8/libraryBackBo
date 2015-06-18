@@ -23,11 +23,14 @@ $("#abook").click(function(){
 
   $("#addarea")
     .css("display", 'inline');
+
+    $("#addBook").css("width", "100%")
   }
-    
-
-
-
-
 
 })
+
+
+
+function bleep(){
+  console.log('button got clicked')
+}

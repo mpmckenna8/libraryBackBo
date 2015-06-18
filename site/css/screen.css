@@ -2,9 +2,11 @@ body {
     background-color: #eee;
 }
 
-#books {
+#addBook {
   background-color:limegreen;
   display:block;
+  width:250px;
+
 
 }
 
@@ -38,8 +40,9 @@ body {
     margin: 10px;
 }
 
+
+
 #addBook label {
-    width: 100px;
     margin-right: 10px;
     text-align: right;
     line-height: 25px;
@@ -49,21 +52,22 @@ body {
     display: block;
     margin-bottom: 10px;
     float: left;
+    width:200px;
 }
 
 #addBook label[for="title"], #addBook label[for="releaseDate"] {
     clear: both;
 }
 
-#addBook button {
+#add {
     display: block;
     margin: 5px 20px 10px 10px;
-    float: right;
+    float: left;
     clear: both;
 }
 
 #addBook div {
-    width: 550px;
+    width: 200px;
     height:inherit;
 
 
@@ -77,4 +81,16 @@ body {
     clear: both;
     font-size: 0;
     line-height: 0;
+}
+
+#urlimager {
+  clear:none;
+}
+
+#orer {
+  clear:left
+}
+
+#elab {
+  clear:left;
 }

@@ -3,11 +3,12 @@ var app = app || {};
 
 app.Book = Backbone.Model.extend({
     defaults: {
-        coverImage: 'img/placeholder.png',
+        coverImage: '',// 'img/placeholder.png',
         title: 'No title',
         author: 'Unknown',
         releaseDate: 'Unknown',
-        keywords: []
+        keywords: [],
+        mailer:'unknown'
     },
     parse: function( response ) {
     response.id = response._id;
@@ -19,6 +20,8 @@ keyvals: function(){
 },
 dater:function(){
   console.log('getting a date from ', this)
-  return 'doing dating'
+  return 'doing dating';
+
+
 }
 });
