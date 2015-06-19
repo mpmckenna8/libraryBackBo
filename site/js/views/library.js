@@ -118,6 +118,9 @@ function dosave(doc){
 	$("#addarea")
 		.css("display", 'none');
 
+		$("#addBook").css("width", "20%")
+
+
 }
 
 	},
