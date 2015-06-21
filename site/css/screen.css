@@ -19,6 +19,7 @@ body {
 .bookContainer {
     outline: 1px solid #aaa;
     width: 350px;
+    min-height: 170px;
     height: auto;
     background-color: #fff;
     float: left;

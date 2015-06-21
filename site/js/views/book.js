@@ -11,7 +11,8 @@ app.BookView = Backbone.View.extend({
 
 	events: {
 		'click .delete': 'deleteBook',
-		'click .edit': 'editup'
+		'click .edit': 'editup',
+		'click .cancel' : 'cancelEd'
 	},
 
 	deleteBook: function() {
@@ -49,15 +50,35 @@ app.BookView = Backbone.View.extend({
 
 		var toren = this.model.toJSON();
 
+		toren.words = []
+
 		toren.releaseDate = new Date(toren.releaseDate *1).getFullYear();
+		console.log(toren.keywords)
+
+		toren.keywords.forEach(function(d, i){
+			console.log(i, d);
+			toren.words.push(d.keyword)
+
+		})
+
+		toren.keywords = toren.words.toString();
 
 
 		var templ = _.template(this.eduTemplate);
 
 
+
+
 		this.$el.html(templ(toren)).css('width', "90%")
 
 
+
+	},
+
+	cancelEd: function(){
+		this.render();
+		console.log(this.$el.css("width"))
+		this.$el.css("width", "")
 
 	}
 });

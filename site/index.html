@@ -74,21 +74,22 @@
 
       <script id="edTemplate" type="text/template">
 
-      <span class="editing">
-        <img height=115 width=90 src="<%= coverImage %>"/>
+        <span class="editing">
+          <img height=115 width=90 src="<%= coverImage %>"/>
 
-        <label for="title">Title: </label><input id="title" type="text" value= <%= title %> />
-        <label for="author">Author: </label><input id="author" type="text" value= <%= author %> />
-        <label for="releaseDate">Release date: </label><input id="releaseDate" type="text" value=<%= releaseDate %>/>
-        <label for="keywords">Keywords: </label><input id="keywords" type="text" value=<% _.each( keywords, function(keyobj)  { %>        <%= keyobj.keyword %><% } ); %>  />
+          <label for="title">Title: </label><input id="title" type="text" value= <%= title %> />
+          <label for="author">Author: </label><input id="author" type="text" value= <%= author %> />
+          <label for="releaseDate">Release date: </label><input id="releaseDate" type="text" value=<%= releaseDate %>/>
+          <label for="keywords">Keywords: </label>
+          <input id="keywords" type="text" value=  <%= keywords  %>  />
 
-        <label for="mailer" id="elab">Your e-mail: </label>
-        <input id="mailer" type="email" value=<%= mailer %>/>
+          <label for="mailer" id="elab">Your e-mail: </label>
+          <input id="mailer" type="email" value=<%= mailer %>/>
 
-      </span>
+        </span>
 
-      <button class="cancel">Cancel</button>
-      <button class="save">Save </button>
+        <button class="cancel">Cancel</button>
+        <button class="save">Save </button>
 
       </script>
 
