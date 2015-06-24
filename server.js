@@ -79,7 +79,7 @@ app.get( '/api/books/:id', function( request, response ) {
 app.post( '/api/books', function( request, response ) {
 
   console.log(Object.keys(request.body));
-  console.log((typeof(request.body.coverImage) ))
+  console.log(((request.body.keywords) ));
 
 
 
@@ -108,13 +108,16 @@ response.send('hogwash')
 //Update a book
 app.put( '/api/books/:id', function( request, response ) {
 	console.log( 'Updating book ' + request.body.title );
+	console.log(request.params.id)
 
 
 	return BookModel.findById( request.params.id, function( err, book ) {
 		book.title = request.body.title;
 		book.author = request.body.author;
 		book.releaseDate = request.body.releaseDate;
-		book.keywords = request.body.keywords;
+		console.log(request.body.keywords)
+		book.keywords = request.body.keywords; //request.body.keywords
+	//	request.body.keywords.each(function(i,cat){console.log(cat)		});
     book.coverImage = request.body.coverImage;
 		book.mailer = request.body.mailer;
 
@@ -122,6 +125,7 @@ app.put( '/api/books/:id', function( request, response ) {
 			if( !err ) {
 				console.log( 'book updated' );
 			} else {
+				console.error('there been a error saving')
 				console.log( err );
 			}
 			return response.send( book );

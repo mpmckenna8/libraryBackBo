@@ -2,10 +2,18 @@ body {
     background-color: #eee;
 }
 
+h3#abook {
+  text-align:center;
+  padding-top:5%;
+  height:40px;
+
+}
+
 #addBook {
   background-color:limegreen;
   display:block;
   width:250px;
+
 
 
 }
@@ -87,7 +95,9 @@ body {
 #urlimager {
   clear:none;
 }
+label {
 
+}
 #orer {
   clear:left
 }

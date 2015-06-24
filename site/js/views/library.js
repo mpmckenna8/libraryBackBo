@@ -6,13 +6,14 @@ app.LibraryView = Backbone.View.extend({
 
 	initialize: function() {
 		this.collection = new app.Library();
-		this.collection.fetch();
+		this.collection.fetch({reset:true});
 		this.render();
 
 
 
 		this.listenTo( this.collection, 'add', this.renderBook );
 		this.listenTo( this.collection, 'reset', this.render );
+
 	},
 
 	events: {
@@ -109,7 +110,6 @@ function dosave(doc){
 
   decollect.create(doc)
 
-
 	$( '#addBook div' ).children( 'input' ).each( function( i, el ) {
 		$(el).val('')
 
@@ -119,7 +119,6 @@ function dosave(doc){
 		.css("display", 'none');
 
 		$("#addBook").css("width", "20%")
-
 
 }
 
@@ -146,6 +145,7 @@ function dosave(doc){
 	}
 
 });
+
 
 
 

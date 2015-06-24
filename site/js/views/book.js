@@ -12,7 +12,8 @@ app.BookView = Backbone.View.extend({
 	events: {
 		'click .delete': 'deleteBook',
 		'click .edit': 'editup',
-		'click .cancel' : 'cancelEd'
+		'click .cancel' : 'cancelEd',
+		'click .save': 'saver'
 	},
 
 	deleteBook: function() {
@@ -32,10 +33,13 @@ app.BookView = Backbone.View.extend({
   // gonna work some magic to fix on up the release date if need be
   var toren = this.model.toJSON();
 
-  console.log(Date.now())
+//  console.log(Date.now())
 
   toren.releaseDate = new Date(toren.releaseDate *1).getFullYear();
-//  console.log(toren)
+  console.log(toren.keywords)
+
+
+
 
 		var tmpl = _.template( this.template );
 
@@ -50,35 +54,134 @@ app.BookView = Backbone.View.extend({
 
 		var toren = this.model.toJSON();
 
-		toren.words = []
+		toren.words = [];
 
-		toren.releaseDate = new Date(toren.releaseDate *1).getFullYear();
-		console.log(toren.keywords)
+		var datey = 'rar'
 
-		toren.keywords.forEach(function(d, i){
-			console.log(i, d);
-			toren.words.push(d.keyword)
+		toren.releaseDate = new Date(toren.releaseDate *1);
+	//	console.log(toren.keywords)
 
-		})
+	console.log(toren.releaseDate.getDate() +"/"+toren.releaseDate.getMonth() + "/" + toren.releaseDate.getFullYear());
 
-		toren.keywords = toren.words.toString();
+	toren.releaseDate = toren.releaseDate.getDate() +"/"+toren.releaseDate.getMonth() + "/" + toren.releaseDate.getFullYear();
+
+	if(toren.keywords){
+	toren.keywords.forEach(function(dop, i ){
+		console.log(dop, i)
+		toren.words.push(dop.keyword)
+	})
+}
+else{
+	toren.words = '';
+}
+
+toren.words = toren.words.toString();
+
+//toren.keywords = [];
+console.log(toren.words)
 
 
 		var templ = _.template(this.eduTemplate);
 
+		this.$el.html(templ(toren)).css('width', "85%").css("height", "fit-content");
 
-
-
-		this.$el.html(templ(toren)).css('width', "90%")
-
+		$("#relDate").datepicker();
 
 
 	},
-
+// This happens when the cancel button is clicked in the edit book view
 	cancelEd: function(){
 		this.render();
-		console.log(this.$el.css("width"))
+	//	console.log(this.$el.css("width"))
 		this.$el.css("width", "")
 
+	},
+	saver:function(){
+
+		var blobber = this.model;
+
+		var chjson = this.model.toJSON();
+
+		console.log(chjson);
+
+	//	console.log((this.$el.context.children[0]).children()) //.children)
+
+		this.$el.children('span').each(function(i,pl){
+
+		//	console.log(i, pl)
+
+
+		})
+
+
+		$(this.$el.context.children[0]).children('input').each(function(i, el){
+			/*
+			defaults: {
+	        coverImage: '',// 'img/placeholder.png',
+	        title: 'No title',
+	        author: 'Unknown',
+	        releaseDate: 'Unknown',
+	        keywords: [],
+	        mailer:'unknown',
+	        checked:{
+	          available:true,
+	          possessed:'CoF'
+	        }
+					*/
+
+			console.log(el);
+
+			var dato = $(el).val();
+			console.log(el.id, dato)
+			if(el.id === 'tit'){
+
+				console.log('changing title')
+				chjson.title = $(el).val();
+			}
+			else if(el.id ==="aut"){
+				if($(el).val() !== chjson.author){
+					chjson.author = dato;
+				}
+			}
+			else if(el.id === "relDate"){
+				if($(el).val() !== chjson.releaseDate){
+
+					console.log(dato, $(el).datepicker('getDate').getTime())
+
+
+					chjson.releaseDate = $(el).datepicker('getDate').getTime();
+				}
+			}
+			else if(el.id === "key"){
+
+				var keyos = [];
+				if($(el).val() !== chjson.keywords.toString() || $(el).val() !=='/'){
+					  console.log($(el).val());
+						var keywos = $(el).val().split(',')
+						console.log(keywos);
+						_.each( keywos , function(keywor){
+							keyos.push({keyword: keywor })
+
+						} )
+						chjson.keywords = keyos;
+				}
+				else{
+					chjson.keywords = [];
+				}
+			}
+
+			})
+// thought this automatically updates with server
+			this.model.set(chjson);
+
+			console.log(this.model)
+
+			Backbone.sync("update", this.model);
+
+			this.cancelEd();
+
+
+
 	}
+
 });
