@@ -13,7 +13,8 @@ app.BookView = Backbone.View.extend({
 		'click .delete': 'deleteBook',
 		'click .edit': 'editup',
 		'click .cancel' : 'cancelEd',
-		'click .save': 'saver'
+		'click .save': 'saver',
+		'click .edPic': 'editPic'
 	},
 
 	deleteBook: function() {
@@ -83,7 +84,7 @@ console.log(toren.words)
 
 		var templ = _.template(this.eduTemplate);
 
-		this.$el.html(templ(toren)).css('width', "85%").css("height", "fit-content");
+		this.$el.html(templ(toren)).css('width', "360px").css("height", "fit-content");
 
 		$("#relDate").datepicker();
 
@@ -104,84 +105,93 @@ console.log(toren.words)
 
 		console.log(chjson);
 
-	//	console.log((this.$el.context.children[0]).children()) //.children)
+		console.log((($(this.$el.context).children('.editing')[0])) )//.children)
 
-		this.$el.children('span').each(function(i,pl){
+		$($(this.$el.context).children('.editing')[0]).children().each(function(i, el){
 
-		//	console.log(i, pl)
+			console.log($(el).children('input'));
+
+			var elid,
+			dato;
+
+			if($(el).children('input').length > 0){
+
+			elid = $(el).children('input')[0].id;
+			dato = $($(el).children('input')[0]).val();
 
 
-		})
+		}
+		else{
+			elid = '';
+		 	dato = '';
 
+		}
 
-		$(this.$el.context.children[0]).children('input').each(function(i, el){
-			/*
-			defaults: {
-	        coverImage: '',// 'img/placeholder.png',
-	        title: 'No title',
-	        author: 'Unknown',
-	        releaseDate: 'Unknown',
-	        keywords: [],
-	        mailer:'unknown',
-	        checked:{
-	          available:true,
-	          possessed:'CoF'
-	        }
-					*/
+			console.log(elid, dato)
+				if(elid === 'tit'){
 
-			console.log(el);
-
-			var dato = $(el).val();
-			console.log(el.id, dato)
-			if(el.id === 'tit'){
-
-				console.log('changing title')
-				chjson.title = $(el).val();
-			}
-			else if(el.id ==="aut"){
-				if($(el).val() !== chjson.author){
-					chjson.author = dato;
+					console.log('changing title')
+					chjson.title = dato;
 				}
-			}
-			else if(el.id === "relDate"){
-				if($(el).val() !== chjson.releaseDate){
-
-					console.log(dato, $(el).datepicker('getDate').getTime())
-
-
-					chjson.releaseDate = $(el).datepicker('getDate').getTime();
+				else if(elid ==="aut"){
+					if($(el).val() !== chjson.author){
+						chjson.author = dato;
+					}
 				}
-			}
-			else if(el.id === "key"){
+				else if(elid === "relDate"){
+					if(dato !== chjson.releaseDate){
 
-				var keyos = [];
-				if($(el).val() !== chjson.keywords.toString() || $(el).val() !=='/'){
-					  console.log($(el).val());
-						var keywos = $(el).val().split(',')
-						console.log(keywos);
-						_.each( keywos , function(keywor){
-							keyos.push({keyword: keywor })
+						console.log(dato, $('#relDate').datepicker('getDate').getTime())
 
-						} )
-						chjson.keywords = keyos;
+
+						chjson.releaseDate = $('#relDate').datepicker('getDate').getTime();
+					}
 				}
-				else{
-					chjson.keywords = [];
+				else if(elid === "key"){
+
+					var keyos = [];
+					if(dato !== chjson.keywords.toString() || $(el).val() !==''){
+						  console.log($(el).val());
+							var keywos = dato.split(',')
+							console.log(keywos);
+							_.each( keywos , function(keywor){
+								keyos.push({keyword: keywor })
+
+							} )
+							chjson.keywords = keyos;
+					}
+					else{
+						chjson.keywords = [];
+					}
 				}
-			}
+
+				else if(elid === "mailo"){
+					console.log(dato)
+						chjson.mailer = dato;
+				}
+
 
 			})
-// thought this automatically updates with server
+// thought this automatically updates with server but now I think i have to do the Backbon.sync thing below.
 			this.model.set(chjson);
 
 			console.log(this.model)
 
 			Backbone.sync("update", this.model);
 
+			console.log(this.model)
+
+
 			this.cancelEd();
 
+	},
 
-
+	editPic: function(){
+		console.log('we need to edit the picture still. Not impletmented');
 	}
 
-});
+
+}
+
+
+	);

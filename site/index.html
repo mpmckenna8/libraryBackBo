@@ -76,20 +76,27 @@
 
         <span class="editing">
           <img height=115 width=90 src="<%= coverImage %>"/>
-
+<div>
           <label for="tit">Title: </label><input id="tit" type="text" value= <%= title %> />
-          <label for="author">Author: </label><input id="aut" type="text" value= <%= author %> />
+</div>
+<div>          <label for="author">Author: </label><input id="aut" type="text" value= <%= author %> />
+</div>
+
+<div>
           <label for="relDate">Release date: </label><input id="relDate" type="text" value=<%= releaseDate %>  >
-          <label for="key">Keywords: </label>
+</div>
+<div>          <label for="key">Keywords: </label>
           <input id="key" type="text" value=  <%= words  %>  >
-
-          <label for="mail" id="elab">Your e-mail: </label>
-          <input id="mail" type="email" value=<%= mailer %> >
-
+</div>
+<div>
+          <label for="mailo" id="elab">Your e-mail: </label>
+          <input id="mailo" type="email" value=<%= mailer %> >
+</div>
         </span>
 
         <button class="cancel">Cancel</button>
         <button class="save">Save </button>
+        <button class="edPic">Edit Picture</button>
 
       </script>
 
