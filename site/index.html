@@ -100,8 +100,35 @@
 
       </script>
 
+      <script id="edPic" type="text/template">
+        <img height=115 width=90 src="<%= coverImage %>"/>
+        <ul>
+            <li><%= title %></li>
+            <li><%= author %></li>
+
+            <label for="picLink">
+              Enter a url to the picture:
+            </label>
+            <input id="picLink" type="text">
+            or </br>
+            <label for="filerP">Upload a file:</label>
+            <input id="filerP" type="file">
+
+        </ul>
+
+        <button class="cancel">Cancel</button>
+        <button class="saveP">Save</button>
+
+      </script>
+
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="js/lib/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+
+
+        <script src="js/lib/savins.js"></script>
+
+
+
 
 
         <script src="bower_components/underscore/underscore.js"></script>

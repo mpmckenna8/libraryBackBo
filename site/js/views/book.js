@@ -7,6 +7,7 @@ app.BookView = Backbone.View.extend({
 	className: 'bookContainer',
 	template: $( '#bookTemplate' ).html(),
 	eduTemplate: $( '#edTemplate').html(),
+	edPicTem: $('#edPic').html(),
 
 
 	events: {
@@ -14,7 +15,12 @@ app.BookView = Backbone.View.extend({
 		'click .edit': 'editup',
 		'click .cancel' : 'cancelEd',
 		'click .save': 'saver',
-		'click .edPic': 'editPic'
+		'click .edPic': 'editPic',
+		'click .saveP': 'savePic',
+	},
+	booksie: function(){
+
+	 return	this.model.toJSON()
 	},
 
 	deleteBook: function() {
@@ -38,7 +44,6 @@ app.BookView = Backbone.View.extend({
 
   toren.releaseDate = new Date(toren.releaseDate *1).getFullYear();
   console.log(toren.keywords)
-
 
 
 
@@ -188,6 +193,110 @@ console.log(toren.words)
 
 	editPic: function(){
 		console.log('we need to edit the picture still. Not impletmented');
+
+		var booksi = this.model.toJSON();
+
+		var templ = _.template( this.edPicTem);
+
+		this.$el.html(templ(booksi))
+
+	},
+	savePic: function(){
+
+
+		console.log(this.booksie());
+		var fitoload = document.getElementById("coverImage").files;
+
+
+		var blap = $(this.el).children('ul')[0] //.context //.forEach(function(d,i){
+		//	console.log(d)
+	//	});
+
+		//console.log($(blap).children('input'));
+
+		var innies = $(blap).children('input');
+
+		console.log(innies)
+
+		// want to change this when I need to wait for a fileupload
+		var simpl = true;
+
+		var pici = {};
+
+		// still need to take care of the image upload in hopper
+		innies.each(hopper)
+
+
+
+	if(simpl){
+
+		this.model.set(pici);
+
+		Backbone.sync("update", this.model);
+
+		this.cancelEd();
+
+
+	}
+
+	else{
+
+		app.octo.readit(pici, this.model);
+	}
+
+
+function hopper(i, d){
+	console.log(d)
+
+	var $d = $(d);
+
+	var valno = $d.val();
+	console.log(valno)
+	this.readit = this.readit
+
+	if(d.id =='picLink'){
+		if(valno){
+			console.log('almost changed the image')
+			pici = {coverImage: valno};
+
+// no access to the this.model from this function unless i when to the parent scope somehows.
+	//	this.model.set(covim);
+
+		}
+
+	}
+	else if (d.id =="filerP"){
+		console.log('in the file thing',  typeof valno)
+		if(valno){
+
+			console.log('a file was found')
+			simpl = false;
+
+console.log(this)
+
+pici = this;
+
+
+console.log(app.octo.readit(this, 'ho'))
+
+  //    app.octo.readit(this)
+
+		}
+	}
+
+}
+function bopper(dah, mod){
+
+	app.octo.readit(da,mod);
+}
+
+
+	},
+
+	readit:function(blr){
+
+		console.log('gotta do a filereader w/ ', blr);
+
 	}
 
 
