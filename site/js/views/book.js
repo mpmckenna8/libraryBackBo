@@ -241,7 +241,7 @@ console.log(toren.words)
 
 	else{
 
-		app.octo.readit(pici, this.model);
+		app.octo.readit(pici, this);
 	}
 
 
@@ -272,14 +272,9 @@ function hopper(i, d){
 			console.log('a file was found')
 			simpl = false;
 
-console.log(this)
+			console.log(this)
 
-pici = this;
-
-
-console.log(app.octo.readit(this, 'ho'))
-
-  //    app.octo.readit(this)
+			pici = this;
 
 		}
 	}
@@ -287,7 +282,8 @@ console.log(app.octo.readit(this, 'ho'))
 }
 function bopper(dah, mod){
 
-	app.octo.readit(da,mod);
+console.log('for some reason bopper called')
+	//app.octo.readit(da,mod);
 }
 
 

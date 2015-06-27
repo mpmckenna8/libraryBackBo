@@ -1,5 +1,8 @@
 var app = app || {};
 
+var modeler;
+
+var that;
 
 app.octo = {
   saveBook: function(){
@@ -8,6 +11,10 @@ app.octo = {
   readit:function(fi, mod){
 
     console.log('filin', fi, mod)
+    var imfi;
+    modeler = mod.model;
+
+    that = mod;
 
     var reader = new FileReader();
 
@@ -17,11 +24,23 @@ app.octo = {
 
     reader.onload = function(fiU){
 
-      console.log('the dataURL should be fiU', fiU)
+      console.log('the dataURL should be fiU but')
 
 
+// need to do to fiU whatever i did in the library view for the file loader thing.
+      imfi = {coverImage:fiU.target.result};
 
-      fiU;
+      saver(imfi);
+
+    }
+
+
+    function saver(covIm){
+
+      console.log(that)
+      that.model.set(imfi);
+
+      that.cancelEd();
 
     }
 

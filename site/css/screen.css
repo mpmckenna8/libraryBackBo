@@ -3,16 +3,33 @@ body {
 }
 
 h3#abook {
+  //text-align:center;
+//  padding-top:5%;
+//  height:40px;
+
+}
+
+h3 {
   text-align:center;
   padding-top:5%;
   height:40px;
+  position:relative;
+  display:table-cell;
 
+  width: 300px;
+
+  margin: 10px;
+}
+
+#outBook{
+
+  background-color: yellow;
 }
 
 #addBook {
   background-color:limegreen;
   display:block;
-  width:250px;
+  width:350px;
 
 
 

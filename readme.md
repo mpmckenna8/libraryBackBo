@@ -9,7 +9,7 @@ http://addyosmani.github.io/backbone-fundamentals/#todo-collection
 Gotta fricking work on my markdown skills and describe this projecton.
 
 
-The basic schema for adding stuff to mongo is
+The basic schema for adding stuff to mongo is but I need to also have either a new object for checkoutbooks or just add an attribute and update the given item each time.
 
 var Book = new mongoose.Schema({
 	title: String,
