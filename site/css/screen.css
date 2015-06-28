@@ -11,14 +11,16 @@ h3#abook {
 
 h3 {
   text-align:center;
-  padding-top:5%;
-  height:40px;
-  position:relative;
-  display:table-cell;
+//  padding-top:5%;
+//  height:40px;
+  //position:relative;
+  //display:table-cell;
 
-  width: 300px;
+//  width: 300px;
 
-  margin: 10px;
+//  margin: 10px;
+
+
 }
 
 #outBook{
@@ -30,15 +32,7 @@ h3 {
   background-color:limegreen;
   display:block;
   width:350px;
-
-
-
 }
-
-#addarea {
-  display:none;
-}
-
 
 
 .bookContainer {
@@ -58,7 +52,7 @@ h3 {
 
 .bookContainer ul {
     list-style-type: none;
-    margin-bottom: 0;
+    //margin-bottom: 0;
 }
 
 .bookContainer button {
@@ -94,10 +88,9 @@ h3 {
 
 #addBook div {
     width: 200px;
-    height:inherit;
-
 
 }
+
 
 #addBook div:after {
     content: "";
@@ -110,19 +103,29 @@ h3 {
 }
 
 #urlimager {
-  clear:none;
+    clear:none;
 }
 label {
 
 }
 #orer {
-  clear:left
+    clear:left
 }
 
 #elab {
-  clear:left;
+    clear:left;
 }
 
 .editing div {
-  margin: 10 10 10 10
+    margin: 10 10 10 10
+}
+
+#tabs-1 {
+    height: 280px;
+    padding:30px;
+
+}
+
+#tabs-1 div {
+    padding: 5px;
 }

@@ -8,20 +8,25 @@ app.Book = Backbone.Model.extend({
         author: 'Unknown',
         releaseDate: 'Unknown',
         keywords: [],
-        mailer:'unknown'
+        mailer:'unknown',
+        checked:{
+          available:true,
+          possessed:'CoF'
+        }
     },
     parse: function( response ) {
     response.id = response._id;
 
     return response;
-},
-keyvals: function(){
-  return _(this.keywords);
-},
-dater:function(){
-  console.log('getting a date from ', this)
-  return 'doing dating';
+  },
+  keyvals: function(){
+    return _(this.keywords);
+  },
+  dater:function(){
+
+    console.log('getting a date from ', this)
+    return 'doing dating';
 
 
-}
+  }
 });

@@ -9,15 +9,14 @@ app.LibraryView = Backbone.View.extend({
 		this.collection.fetch({reset:true});
 		this.render();
 
-
-
 		this.listenTo( this.collection, 'add', this.renderBook );
 		this.listenTo( this.collection, 'reset', this.render );
 
 	},
 
 	events: {
-		'click #add': 'addBook'
+		'click #add': 'addBook',
+		'click #sfplURL': 'liblink'
 	},
   // Right now I have the coverImage set to save to a ArrayBuffer
   //dfkd
@@ -142,12 +141,36 @@ function dosave(doc){
 
 	disAddBook: function(){
 
+	},
+	liblink:function(e){
+
+		console.log(e)
+		var linker = $('#urlLib').val();
+
+		console.log(linker)
+
+		$.ajax({
+			url:"/api/sfpl",
+			data: {'info':linker},
+			type:'POST'
+		}).done(function(){
+			console.log('done sent somedin')
+		})
+
+
+
+
 	}
 
 });
 
 
+$( document ).ajaxComplete(function() {
+  console.log('ajaxy thing is done')
+	$( ".log" ).text( "Triggered ajaxComplete handler." );
 
+
+});
 
 // Check for the various File API support.
 if (window.File && window.FileReader && window.FileList && window.Blob) {

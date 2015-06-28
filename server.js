@@ -6,6 +6,8 @@ var application_root = __dirname,
 	path = require( 'path' ), //Utilities for dealing with file paths
 	mongoose = require( 'mongoose' ); //MongoDB integration
 
+
+var kimolib = require('./kimoprac/kimoMod.js')
 //Create server
 var app = express();
 
@@ -81,9 +83,6 @@ app.post( '/api/books', function( request, response ) {
   console.log(Object.keys(request.body));
   console.log(((request.body.keywords) ));
 
-
-
-
 	var book = new BookModel({
 		title: request.body.title,
 		author: request.body.author,
@@ -103,6 +102,22 @@ app.post( '/api/books', function( request, response ) {
 	});
 
 response.send('hogwash')
+});
+
+app.post( '/api/sfpl', function( request, response ) {
+
+	console.log(Object.keys(request));
+
+	console.log(request.body)
+
+	kimolib('1414409093_palm_trees')
+
+
+
+
+	response.send('Got that jam')
+
+
 });
 
 //Update a book

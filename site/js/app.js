@@ -2,6 +2,9 @@ var app = app || {};
 
 $(function() {
 
+  $("#tabs").tabs();
+
+
     $( '#releaseDate' ).datepicker();
 
     new app.LibraryView();
@@ -9,10 +12,20 @@ $(function() {
     Backbone.emulateHTTP = false;
 
     $("#relDate").datepicker();
+
+    $("#tabs-2").css("display", "none")
+
+    $("#oubook").click(function(){
+      console.log('thinger goy clicked')
+
+      $("#tabs-2").css("display", "inherit");
+
+    })
 });
 
 console.log($("#addarea").css("display"))
 
+/*
 
 $("#abook").click(function(){
   console.log('add bokk got clicked yo')
@@ -22,13 +35,16 @@ $("#abook").click(function(){
   if( $("#addarea").css("display") == "none"){
 
 
-  $("#addarea")
-    .css("display", 'inline');
+  //$("#addarea").css("display", 'inline');
 
-    $("#addBook").css("width", "100%")
+  //  $("#addBook").css("width", "100%")
   }
 
-})
+
+  */
+
+
+
 
 
 

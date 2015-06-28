@@ -10,11 +10,25 @@
     <body>
       <div id="books">
 
-        <div id="addBook" action="#">
-          <h3 id="abook">Add a new book </h3>
-          <h3 id="outBook"> Book from outside </h3>
+        <div id="tabs" >
+        <ul>
+          <li>
+            <a href="#tabs-1"><h3 id="abook">Add a new book </h3>
+          </a>
 
-            <div id="addarea">
+          </li>
+
+          <li id="oubook">
+            <a href="#tabs-2"><h3 id="outBook"> Book from outside </h3>
+
+            </a>
+          </li>
+
+        </ul>
+
+            <div id="tabs-1">
+
+              <div>
 
                 <label for="coverImage">
                   CoverImage:
@@ -26,24 +40,46 @@
 
                   <input id="coverImage" type="file"  />
 
+                </div>
 
+                </br>
 
-                <label for="title">Title: </label><input id="title" type="text" />
-                <label for="author">Author: </label><input id="author" type="text" />
+                <div>
+                  <label for="title">Title: </label><input id="title" type="text" />
+                </div>
+                <div>
+                  <label for="author">Author: </label><input id="author" type="text" />
+                </div>
+
+              <div>
                 <label for="releaseDate">Release date: </label><input id="releaseDate" type="text" />
+              </div>
+              <div>
                 <label for="keywords">Keywords: </label><input id="keywords" type="text" />
-
+              </div>
+              <div>
                 <label for="mailer" id="elab">Your e-mail: </label>
                 <input id="mailer" type="email" />
+              </div>
+
                 <button id="add">Add</button>
+
+
             </div>
+
+            <div id="tabs-2">
+              <label for="urlLib">URL from SFPL <input type="text" id="urlLib" class="liburl"> </br>
+
+                <button id="sfplURL">Submit </button>
+
+            </div>
+
+
 
         </div>
 
 
-
       </div>
-
 
 
       <script id="bookTemplate" type="text/template">
@@ -90,6 +126,7 @@
 <div>          <label for="key">Keywords: </label>
           <input id="key" type="text" value=  <%= words  %>  >
 </div>
+
 <div>
           <label for="mailo" id="elab">Your e-mail: </label>
           <input id="mailo" type="email" value=<%= mailer %> >
@@ -128,8 +165,6 @@
 
 
         <script src="js/lib/savins.js"></script>
-
-
 
 
 
