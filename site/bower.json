@@ -1,0 +1,25 @@
+{
+  "name": "libsite",
+  "version": "0.0.1",
+  "homepage": "https://github.com/mpmckenna8/libraryBackBo",
+  "authors": [
+    "mpmckenna8 <mpmckenna8@me.com>"
+  ],
+  "description": "Library site bower dependencies",
+  "main": "index.html",
+  "keywords": [
+    "stuff"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.2.0",
+    "jquery": "~2.1.4"
+  }
+}
