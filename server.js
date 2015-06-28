@@ -267,6 +267,6 @@ tobook.coverImage = '';
 
 //Start server
 var port = 4711;
-app.listen( port, function() {
+app.listen( process.env.PORT || port, function() {
 	console.log( 'Express server listening on port %d in %s mode', port, app.settings.env );
 });
