@@ -17,6 +17,7 @@ app.BookView = Backbone.View.extend({
 		'click .save': 'saver',
 		'click .edPic': 'editPic',
 		'click .saveP': 'savePic',
+		'click .checkout': 'checkit'
 	},
 	booksie: function(){
 
@@ -293,10 +294,18 @@ console.log('for some reason bopper called')
 
 		console.log('gotta do a filereader w/ ', blr);
 
-	}
+	},
+
+
+	checkit:checkout
+
 
 
 }
 
 
 	);
+
+function checkout(){
+	console.log('ready to checkout', this)
+}

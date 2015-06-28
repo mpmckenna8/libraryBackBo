@@ -9,7 +9,7 @@ var url = "http://www.kimonolabs.com/api/ondemand/6uqet87k?apikey=" + key.kimono
 
 //var book = process.argv[2] || "1414409093_palm_trees";
 
-module.exports = function(book){
+module.exports = function(book, booklink, cb, response){
 
 var useurl = url + book;
 request( useurl,
@@ -22,7 +22,8 @@ if (err){
 
   console.log('body')
 
-  console.log(body)
+  //console.log(body)
+  cb(body, booklink, response)
 
 
 });

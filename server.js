@@ -6,13 +6,18 @@ var application_root = __dirname,
 	path = require( 'path' ), //Utilities for dealing with file paths
 	mongoose = require( 'mongoose' ); //MongoDB integration
 
+	var url = require('url'); // to parse the url for sfpl books
+
 
 var kimolib = require('./kimoprac/kimoMod.js')
 //Create server
 var app = express();
 
+
+
 //Connect to database
-mongoose.connect( 'mongodb://localhost/library_database' );
+mongoose.connect( "mongodb://heroku_1rgxp88l:hu9f39deakldabb0cn7s4e3r25@ds037387.mongolab.com:37387/heroku_1rgxp88l")
+	//'mongodb://localhost/library_database' ); mongodb://heroku_1rgxp88l:hu9f39deakldabb0cn7s4e3r25@ds037387.mongolab.com:37387/heroku_1rgxp88l
 
 //Schemas
 var Keywords = new mongoose.Schema({
@@ -26,8 +31,16 @@ var Book = new mongoose.Schema({
   coverImage: String,
 	mailer:String,
 
-	keywords: [ Keywords ]
+	keywords: [ Keywords ],
+	checked:{
+		available:Boolean,
+		possessed:String
+	}
+
+
 });
+
+
 
 //Models
 var BookModel = mongoose.model( 'Book', Book );
@@ -89,7 +102,8 @@ app.post( '/api/books', function( request, response ) {
 		releaseDate: request.body.releaseDate,
 		keywords: request.body.keywords,
     coverImage: request.body.coverImage,
-		mailer: request.body.mailer
+		mailer: request.body.mailer,
+		checked: request.body.checked
 	});
 
 	book.save( function( err ) {
@@ -110,15 +124,26 @@ app.post( '/api/sfpl', function( request, response ) {
 
 	console.log(request.body)
 
-	kimolib('1414409093_palm_trees')
+	var bookU = request.body.info;
+
+	var urlp = url.parse(request.body.info)
+	console.log(urlp)
+
+	var pops = urlp.pathname.split('/');
+
+	var tobo = pops[pops.length - 1];
+
+	console.log('and to query', tobo)
 
 
 
+	kimolib(tobo, bookU, addSFbook, response)
 
-	response.send('Got that jam')
+	response.send('Kimono was given an address to look forGot that jam and on refresh you should see a new book!!')
 
 
 });
+
 
 //Update a book
 app.put( '/api/books/:id', function( request, response ) {
@@ -135,6 +160,8 @@ app.put( '/api/books/:id', function( request, response ) {
 	//	request.body.keywords.each(function(i,cat){console.log(cat)		});
     book.coverImage = request.body.coverImage;
 		book.mailer = request.body.mailer;
+
+
 
 		return book.save( function( err ) {
 			if( !err ) {
@@ -162,6 +189,81 @@ app.delete( '/api/books/:id', function( request, response ) {
 		});
 	});
 });
+
+
+function addSFbook(sfbook, link, response){
+	console.log('made it to sfbook', typeof sfbook);
+
+
+
+
+	var bookob = JSON.parse(sfbook).results.collection1[0];
+	console.log(bookob)
+
+	var tobook = {};
+
+	tobook.title = bookob.title;
+
+	//
+	if(link){
+	tobook.checked = {
+		available:true,
+		possessed: link
+	};
+}
+else{
+	tobook.checked = {
+	available:true,
+	possessed:"http://sfpl.org/"
+}
+}
+
+tobook.releaseDate = '';
+tobook.author = '';
+
+if(bookob.pic.src){
+	tobook.coverImage = bookob.pic.src;
+}
+else{
+tobook.coverImage = '';
+}
+
+
+
+
+	var sfbook = new BookModel({
+
+		title: 	bookob.title,
+		author: tobook.author,
+		releaseDate: tobook.releaseDate,
+		keywords: [],
+		coverImage: tobook.coverImage,
+		mailer: '',
+		checked: {
+			available:true,
+			possessed:link
+		}
+
+	});
+
+
+
+	sfbook.save(function(err){
+		if(err){
+			console.log('something went wrong with the sfpl save')
+		}
+		else{
+			console.log('saved a new book')
+		}
+
+		console.log(sfbook)
+
+	})
+
+
+
+}
+
 
 //Start server
 var port = 4711;

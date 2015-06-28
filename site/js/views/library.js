@@ -127,6 +127,8 @@ function dosave(doc){
 	render: function() {
 		this.collection.each(function( item ) {
 			this.renderBook( item );
+
+			console.log(item)
 		}, this );
 	},
 
