@@ -41,6 +41,8 @@ app.BookView = Backbone.View.extend({
   // gonna work some magic to fix on up the release date if need be
   var toren = this.model.toJSON();
 
+
+
 //  console.log(Date.now())
 
   toren.releaseDate = new Date(toren.releaseDate *1).getFullYear();
@@ -308,4 +310,6 @@ console.log('for some reason bopper called')
 
 function checkout(){
 	console.log('ready to checkout', this)
+
+
 }

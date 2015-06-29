@@ -36,8 +36,10 @@ app.LibraryView = Backbone.View.extend({
 
 		var formData = {};
 
-		$( '#addarea' ).children( 'input' ).each( function( i, el ) {
-			console.log('get the childrens')
+		console.log($("#tabs-1").children())
+
+		$( '#tabs-1' ).children( 'div' ).each( function( i, el ) {
+			console.log('get the childrens', el)
 
 			if( $( el ).val() != "" )
 			{

@@ -17,8 +17,8 @@ var app = express();
 
 //Connect to database
 mongoose.connect(
-	"mongodb://heroku_1rgxp88l:hu9f39deakldabb0cn7s4e3r25@ds037387.mongolab.com:37387/heroku_1rgxp88l")
-	//'mongodb://localhost/library_database' ); mongodb://heroku_1rgxp88l:hu9f39deakldabb0cn7s4e3r25@ds037387.mongolab.com:37387/heroku_1rgxp88l
+	//"mongodb://heroku_1rgxp88l:hu9f39deakldabb0cn7s4e3r25@ds037387.mongolab.com:37387/heroku_1rgxp88l")
+	'mongodb://localhost/library_database' ); mongodb://heroku_1rgxp88l:hu9f39deakldabb0cn7s4e3r25@ds037387.mongolab.com:37387/heroku_1rgxp88l
 
 //Schemas
 var Keywords = new mongoose.Schema({
