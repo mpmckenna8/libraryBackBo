@@ -163,6 +163,7 @@ app.put( '/api/books/:id', function( request, response ) {
 	//	request.body.keywords.each(function(i,cat){console.log(cat)		});
     book.coverImage = request.body.coverImage;
 		book.mailer = request.body.mailer;
+		book.checked = request.body.checked;
 
 
 

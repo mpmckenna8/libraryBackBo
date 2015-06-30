@@ -39,7 +39,14 @@ app.LibraryView = Backbone.View.extend({
 		console.log($("#tabs-1").children())
 
 		$( '#tabs-1' ).children( 'div' ).each( function( i, el ) {
-			console.log('get the childrens', el)
+			console.log('get the childrens', $($(el).context).children('input'))
+
+			var govner = $($(el).context).children('input');
+			if (govner.length > 0){
+			govner.each(function(i, el){
+
+
+
 
 			if( $( el ).val() != "" )
 			{
@@ -100,6 +107,10 @@ app.LibraryView = Backbone.View.extend({
 
 
 		});
+	}
+
+		})
+
 		if(fitoload.length === 0){
 			console.log('saving here')
 			dosave( formData );

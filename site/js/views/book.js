@@ -8,6 +8,8 @@ app.BookView = Backbone.View.extend({
 	template: $( '#bookTemplate' ).html(),
 	eduTemplate: $( '#edTemplate').html(),
 	edPicTem: $('#edPic').html(),
+	checkTem: $("#checker").html(),
+
 
 
 	events: {
@@ -17,7 +19,8 @@ app.BookView = Backbone.View.extend({
 		'click .save': 'saver',
 		'click .edPic': 'editPic',
 		'click .saveP': 'savePic',
-		'click .checkout': 'checkit'
+		'click .checkout': 'checkit',
+		'click .checkOut': 'checkO'
 	},
 	booksie: function(){
 
@@ -42,18 +45,20 @@ app.BookView = Backbone.View.extend({
   var toren = this.model.toJSON();
 
 
-
 //  console.log(Date.now())
 
   toren.releaseDate = new Date(toren.releaseDate *1).getFullYear();
   console.log(toren.keywords)
 
 
-
 		var tmpl = _.template( this.template );
 
 		//this.el is what we defined in tagName. use $el to get access to jQuery html() function
 		this.$el.html( tmpl( toren ) );
+
+		if(toren.checked.possessed !== 'CoF'){
+			this.$el.addClass('checkedOut')
+		}
 
 		return this;
 	},
@@ -299,17 +304,62 @@ console.log('for some reason bopper called')
 	},
 
 
-	checkit:checkout
+	checkit:checkout,
+
+	checkO:function(){
+		console.log('checking out', this.model);
+
+		console.log($('#checkE').val())
+
+		var checker = $('#checkE').val();
+
+		var nowChecked = {
+			checked:{
+				available:false,
+				possessed: checker
+			}
+		}
+
+		this.model.set(nowChecked);
+
+
+		Backbone.sync("update", this.model);
+
+		console.log((this.$el.addClass('checkedOut')));
+
+
+
+		this.cancelEd();
+
+
+
+	}
+	// this is where checkO ended
 
 
 
 }
 
 
-	);
+);
+
+
+
+
 
 function checkout(){
 	console.log('ready to checkout', this)
+
+	var toren = this.model.toJSON();
+
+
+
+	var templ = _.template(this.checkTem);
+
+	this.$el.html(templ(toren)).css('width', "80%").css("height", "fit-content");
+
+
+
 
 
 }

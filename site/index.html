@@ -12,7 +12,7 @@
 
         <div id="tabs" >
         <ul>
-          <li>
+          <li id="adder">
             <a href="#tabs-1"><h3 id="abook">Add a new book </h3>
           </a>
 
@@ -157,6 +157,33 @@
 
         <button class="cancel">Cancel</button>
         <button class="saveP">Save</button>
+
+      </script>
+
+      <script id="checker" type="text/template">
+
+        <span class="checksie">
+
+
+        <img height=115 width=90 src="<%= coverImage %>"/>
+        <ul>
+            <li><%= title %></li>
+            <li><%= author %></li>
+
+            <li>
+              <label for="checkE"> Your e-mail: </label>
+              <input type="email" id="checkE"  >
+            </li>
+
+
+
+        </ul>
+
+        <button class="checkOut">Checkout</button>
+        <button class="cancel">Cancel</button>
+
+
+      </span>
 
       </script>
 

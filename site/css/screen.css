@@ -129,3 +129,18 @@ label {
 #tabs-1 div {
     padding: 5px;
 }
+
+.checksie button {
+  float:left;
+  width:40%;
+  height:30px;
+  background:lightgreen;
+}
+
+button.cancel{
+  background:red;
+}
+
+.checkedOut {
+  background: orange;
+}

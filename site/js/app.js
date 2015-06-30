@@ -13,17 +13,18 @@ $(function() {
 
     $("#relDate").datepicker();
 
-    $("#tabs-2").css("display", "none")
+    $("#tabs-1").css("display", "none")
 
-    $("#oubook").click(function(){
+    $("#adder").click(function(){
       console.log('thinger goy clicked')
 
-      $("#tabs-2").css("display", "inherit");
+      $("#tabs-1").css("display", "block");
+      console.log('clicking on thing')
 
     })
 });
 
-console.log($("#addarea").css("display"))
+//console.log($("#addarea").css("display"))
 
 /*
 
