@@ -81,7 +81,9 @@
 
 
       <script id="bookTemplate" type="text/template">
-      <a class="checkout" href=<%if(checked.possessed == 'CoF'){ %> "#<%= title %>"  <% } %> >
+      <a class=""
+      href=<%if(checked.possessed == 'CoF'){ %> "#<%= title %>"  <% }else{  %>
+        "#<%= checked.available %>" <% } %> >
 
          <img height=115 width=90 src="<%= coverImage %>"/>
 

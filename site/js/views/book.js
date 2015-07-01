@@ -59,6 +59,12 @@ app.BookView = Backbone.View.extend({
 		if(toren.checked.possessed !== 'CoF'){
 			this.$el.addClass('checkedOut')
 		}
+		else{
+
+
+			this.$el.addClass('checkout')
+			console.log($($(this.$el.context.children).filter('a')).addClass('checkout'))
+		}
 
 		return this;
 	},
