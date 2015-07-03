@@ -16,7 +16,9 @@ app.LibraryView = Backbone.View.extend({
 
 	events: {
 		'click #add': 'addBook',
-		'click #sfplURL': 'liblink'
+		'click #sfplURL': 'liblink',
+		'click #retBook': 'returnB'
+
 	},
   // Right now I have the coverImage set to save to a ArrayBuffer
   //dfkd
@@ -141,7 +143,7 @@ function dosave(doc){
 		this.collection.each(function( item ) {
 			this.renderBook( item );
 
-			console.log(item)
+		//	console.log(item)
 		}, this );
 	},
 
@@ -175,7 +177,8 @@ function dosave(doc){
 
 
 
-	}
+	},
+	returnB: app.octo.bookRet,
 
 });
 

@@ -24,6 +24,7 @@ mongoose.connect(
 var Keywords = new mongoose.Schema({
 	keyword: String
 });
+
 // everything is as it started except for I added a coverImage which is a string data.URL which kindof works for now.
 var Book = new mongoose.Schema({
 	title: String,
@@ -199,10 +200,8 @@ function addSFbook(sfbook, link, response){
 	console.log('made it to sfbook', typeof sfbook);
 
 
-
-
-	var bookob = JSON.parse(sfbook).results.collection1[0];
-	console.log(bookob)
+		var bookob = JSON.parse(sfbook).results.collection1[0];
+		console.log(bookob)
 
 	var tobook = {};
 
@@ -244,7 +243,7 @@ tobook.coverImage = '';
 		coverImage: tobook.coverImage,
 		mailer: '',
 		checked: {
-			available:true,
+			available:false,
 			possessed:link
 		}
 

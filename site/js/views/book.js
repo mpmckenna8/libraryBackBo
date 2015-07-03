@@ -20,7 +20,7 @@ app.BookView = Backbone.View.extend({
 		'click .edPic': 'editPic',
 		'click .saveP': 'savePic',
 		'click .checkout': 'checkit',
-		'click .checkOut': 'checkO'
+		'click .checkOut': 'checkO',
 	},
 	booksie: function(){
 
@@ -48,7 +48,8 @@ app.BookView = Backbone.View.extend({
 //  console.log(Date.now())
 
   toren.releaseDate = new Date(toren.releaseDate *1).getFullYear();
-  console.log(toren.keywords)
+
+//  console.log(toren.keywords)
 
 
 		var tmpl = _.template( this.template );
@@ -61,7 +62,7 @@ app.BookView = Backbone.View.extend({
 		}
 		else{
 
-
+			// this one wasn't much helpful
 			this.$el.addClass('checkout')
 			console.log($($(this.$el.context.children).filter('a')).addClass('checkout'))
 		}
