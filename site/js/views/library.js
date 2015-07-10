@@ -20,123 +20,10 @@ app.LibraryView = Backbone.View.extend({
 		'click #retBook': 'returnB'
 
 	},
-  // Right now I have the coverImage set to save to a ArrayBuffer
+  // Right now I have the coverImage set to save to a urlDatq
   //dfkd
-	addBook: function( e ) {
-
-		console.log('at least tried')
-
-    var decollect = this.collection;
-
-    console.log(this.collection)
-		e.preventDefault();
-
-    var fiload = false;
-
-    var fitoload = document.getElementById("coverImage").files;
-
-
-		var formData = {};
-
-		console.log($("#tabs-1").children())
-
-		$( '#tabs-1' ).children( 'div' ).each( function( i, el ) {
-			console.log('get the childrens', $($(el).context).children('input'))
-
-			var govner = $($(el).context).children('input');
-			if (govner.length > 0){
-			govner.each(function(i, el){
-
-
-
-
-			if( $( el ).val() != "" )
-			{
-				console.log('got some val ',  $( el ).val())
-				if( el.id === 'keywords' ) {
-					formData[ el.id ] = [];
-					_.each( $( el ).val().split( ' ' ), function( keyword ) {
-						formData[ el.id ].push({ 'keyword': keyword });
-					});
-				} else if( el.id === 'releaseDate' ) {
-					formData[ el.id ] = $( '#releaseDate' ).datepicker( 'getDate' ).getTime();
-				}
-				else if (el.id === "mailer"){
-					console.log($("#mailer"))
-
-					formData[el.id] = $("#mailer").val()
-				}
-
-        else if (el.id === "coverImage")
-        {
-
-          if(fitoload.length > 0){
-              console.log("trying to make the cover image");
-              console.log(document.getElementById("coverImage").files[0])
-              console.log($("#coverImage")[0].files)
-              var pepy =$("#coverImage")[0].files[0];
-              var reader = new FileReader();
-
-								//would probably be ideal to use readAsArrayBuffer especially to store in mongo and transfer but whatevs for here
-               reader.readAsDataURL(pepy)
-
-               reader.onload = function(fibuf){
-                 console.log(fibuf);
-
-                 formData[el.id] = fibuf.target.result;
-
-                 dosave(formData);
-
-               };
-         }
-
-        }
-				else if (el.id === "urlimager"){
-						if($(el).val()){
-							console.log($(el).val())
-							formData.coverImage = $(el).val()
-						}
-					}
-        else {
-
-					formData[ el.id ] = $( el ).val();
-				}
-			console.log('going through form')
-
-			}
-
-
-
-
-		});
-	}
-
-		})
-
-		if(fitoload.length === 0){
-			console.log('saving here')
-			dosave( formData );
-		}
-
-
-
-function dosave(doc){
-
-  decollect.create(doc)
-
-	$( '#addBook div' ).children( 'input' ).each( function( i, el ) {
-		$(el).val('')
-
-	})
-
-	$("#addarea")
-		.css("display", 'none');
-
-		$("#addBook").css("width", "20%")
-
-}
-
-	},
+	//
+	addBook: app.octo.newbook,
 
 	// render library by rendering each book in its collection
 	render: function() {
@@ -156,16 +43,13 @@ function dosave(doc){
 		this.$el.append( bookView.render().el );
 	},
 
-	disAddBook: function(){
-
-	},
 	liblink:function(e){
 
 		console.log(e)
 		var linker = $('#urlLib').val();
 
 		console.log(linker)
-
+// Just doing a simple ajax post to send a book to the server to process through my kimono thing
 		$.ajax({
 			url:"/api/sfpl",
 			data: {'info':linker},
@@ -174,13 +58,12 @@ function dosave(doc){
 			console.log('done sent somedin')
 		})
 
-
-
-
 	},
 	returnB: app.octo.bookRet,
 
-});
+	});
+
+	
 
 
 $( document ).ajaxComplete(function() {

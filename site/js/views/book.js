@@ -45,27 +45,15 @@ app.BookView = Backbone.View.extend({
   var toren = this.model.toJSON();
 
 
-//  console.log(Date.now())
-
   toren.releaseDate = new Date(toren.releaseDate *1).getFullYear();
-
-//  console.log(toren.keywords)
-
 
 		var tmpl = _.template( this.template );
 
 		//this.el is what we defined in tagName. use $el to get access to jQuery html() function
 		this.$el.html( tmpl( toren ) );
 
-		if(toren.checked.possessed !== 'CoF'){
-			this.$el.addClass('checkedOut')
-		}
-		else{
-
-			// this one wasn't much helpful
-			this.$el.addClass('checkout')
-			console.log($($(this.$el.context.children).filter('a')).addClass('checkout'))
-		}
+//console.log(app.octo.renBookClass('blah'));
+		app.octo.renBookClass(toren, this)
 
 		return this;
 	},
@@ -86,20 +74,20 @@ app.BookView = Backbone.View.extend({
 
 	toren.releaseDate = toren.releaseDate.getDate() +"/"+toren.releaseDate.getMonth() + "/" + toren.releaseDate.getFullYear();
 
-	if(toren.keywords){
-	toren.keywords.forEach(function(dop, i ){
-		console.log(dop, i)
-		toren.words.push(dop.keyword)
-	})
-}
-else{
-	toren.words = '';
-}
+		if(toren.keywords){
+			toren.keywords.forEach(function(dop, i ){
+				console.log(dop, i)
+				toren.words.push(dop.keyword)
+			})
+		}
+		else{
+			toren.words = '';
+		}
 
 toren.words = toren.words.toString();
 
 //toren.keywords = [];
-console.log(toren.words)
+//console.log(toren.words)
 
 
 		var templ = _.template(this.eduTemplate);
@@ -117,94 +105,8 @@ console.log(toren.words)
 		this.$el.css("width", "")
 
 	},
-	saver:function(){
-
-		var blobber = this.model;
-
-		var chjson = this.model.toJSON();
-
-		console.log(chjson);
-
-		console.log((($(this.$el.context).children('.editing')[0])) )//.children)
-
-		$($(this.$el.context).children('.editing')[0]).children().each(function(i, el){
-
-			console.log($(el).children('input'));
-
-			var elid,
-			dato;
-
-			if($(el).children('input').length > 0){
-
-			elid = $(el).children('input')[0].id;
-			dato = $($(el).children('input')[0]).val();
-
-
-		}
-		else{
-			elid = '';
-		 	dato = '';
-
-		}
-
-			console.log(elid, dato)
-				if(elid === 'tit'){
-
-					console.log('changing title')
-					chjson.title = dato;
-				}
-				else if(elid ==="aut"){
-					if($(el).val() !== chjson.author){
-						chjson.author = dato;
-					}
-				}
-				else if(elid === "relDate"){
-					if(dato !== chjson.releaseDate){
-
-						console.log(dato, $('#relDate').datepicker('getDate').getTime())
-
-
-						chjson.releaseDate = $('#relDate').datepicker('getDate').getTime();
-					}
-				}
-				else if(elid === "key"){
-
-					var keyos = [];
-					if(dato !== chjson.keywords.toString() || $(el).val() !==''){
-						  console.log($(el).val());
-							var keywos = dato.split(',')
-							console.log(keywos);
-							_.each( keywos , function(keywor){
-								keyos.push({keyword: keywor })
-
-							} )
-							chjson.keywords = keyos;
-					}
-					else{
-						chjson.keywords = [];
-					}
-				}
-
-				else if(elid === "mailo"){
-					console.log(dato)
-						chjson.mailer = dato;
-				}
-
-
-			})
-// thought this automatically updates with server but now I think i have to do the Backbon.sync thing below.
-			this.model.set(chjson);
-
-			console.log(this.model)
-
-			Backbone.sync("update", this.model);
-
-			console.log(this.model)
-
-
-			this.cancelEd();
-
-	},
+	// this is in the savins.js file and deals with going through all the edit jam to save whatever stuff is in the fields.
+	saver:app.octo.saveBook,
 
 	editPic: function(){
 		console.log('we need to edit the picture still. Not impletmented');
@@ -308,6 +210,7 @@ console.log('for some reason bopper called')
 
 		console.log('gotta do a filereader w/ ', blr);
 
+
 	},
 
 
@@ -335,23 +238,18 @@ console.log('for some reason bopper called')
 		console.log((this.$el.addClass('checkedOut')));
 
 
-
 		this.cancelEd();
 
 
-
-	}
+	},
 	// this is where checkO ended
 
 
-
-}
-
-
-);
+});
 
 
 
+// These are just helper functions down here
 
 
 function checkout(){
@@ -360,12 +258,9 @@ function checkout(){
 	var toren = this.model.toJSON();
 
 
-
 	var templ = _.template(this.checkTem);
 
 	this.$el.html(templ(toren)).css('width', "80%").css("height", "fit-content");
-
-
 
 
 

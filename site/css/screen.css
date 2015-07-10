@@ -144,3 +144,19 @@ button.cancel{
 .checkedOut {
   background: orange;
 }
+
+.inimg{
+  position:absolute;
+  margin:10px;
+  height:115px;
+  width:90px;
+  //display: none;
+
+}
+
+.available .inimg:hover {
+  background: green;
+  opacity:.4;
+  display:block;
+
+}

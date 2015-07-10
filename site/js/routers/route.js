@@ -14,8 +14,9 @@ var Workspace = Backbone.Router.extend({
 
     // Trigger a collection filter event, causing hiding/unhiding
     // of Todo view items
-    app.Library.trigger('filter');
 
+  //  app.Library.trigger('filter');
+    console.log(param)
 
   }
 });
