@@ -150,7 +150,9 @@ button.cancel{
   margin:10px;
   height:115px;
   width:90px;
-  //display: none;
+
+  text-align:center;
+
 
 }
 
@@ -159,4 +161,20 @@ button.cancel{
   opacity:.4;
   display:block;
 
+
+}
+.checkIm {
+  display:none;
+
+}
+
+.available .inimg:hover .checkIm {
+  display:inherit;
+  color:yellow;
+
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -60%)
 }

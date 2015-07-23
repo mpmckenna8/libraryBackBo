@@ -222,11 +222,15 @@ console.log('for some reason bopper called')
 		console.log($('#checkE').val())
 
 		var checker = $('#checkE').val();
+		var dueday = Date.now();
+		var doer = new Date();
+		console.log(new Date(dueday).toDateString(), new Date(new Date().setDate(doer.getDate() + 35)).toDateString())
 
 		var nowChecked = {
 			checked:{
 				available:false,
-				possessed: checker
+				possessed: checker,
+				due: dueday
 			}
 		}
 

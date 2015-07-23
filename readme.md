@@ -31,3 +31,16 @@ If people or a bot tries to spam add stuff it would probably be good to verify e
 Don't think it will be much of a problem here though.
 
 Want to use Kimono for making an api for the sites that don't give me one.
+
+
+
+
+Mongo query to return all the books that are currently checked out:
+
+	db.books.find({$where:"obj.checked.available == false"}, {title:1, checked:1});
+
+then to set all the not available ones to having the same email so as to do a mass return of books:
+
+	db.books.update( {$where:"obj.checked.available == false"}, {$set:{checked:{possessed:"CoF", available:true} } }, {multi:true} )
+
+gotsta make it so the due date gets set on checkout

@@ -11,7 +11,8 @@ app.Book = Backbone.Model.extend({
         mailer:'unknown',
         checked:{
           available:true,
-          possessed:'CoF'
+          possessed:'CoF',
+          due:''
         }
     },
     parse: function( response ) {

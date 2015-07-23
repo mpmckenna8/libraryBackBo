@@ -36,9 +36,9 @@ var Book = new mongoose.Schema({
 	keywords: [ Keywords ],
 	checked:{
 		available:Boolean,
-		possessed:String
+		possessed:String,
+		due:String
 	}
-
 
 });
 
@@ -64,6 +64,8 @@ app.configure( function() {
 	//Show all errors in development
 	app.use( express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
+
+
 
 // Routes
 app.get( '/api', function( request, response ) {
@@ -109,6 +111,10 @@ app.post( '/api/books', function( request, response ) {
 
 	});
 
+	book.checked.date = new Date().getTime();
+
+	console.log(typeof(book.checked.date))
+
 	book.save( function( err ) {
 		if( !err ) {
 			return console.log( 'created' );
@@ -143,7 +149,7 @@ app.post( '/api/sfpl', function( request, response ) {
 
 	kimolib(tobo, bookU, addSFbook, response)
 
-	response.send('Kimono was given an address to look forGot that jam and on refresh you should see a new book!!')
+	response.send('Kimono was given an address to look for that jam and on refresh you should see a new book as long as it finds your link successfully!!')
 
 
 });
@@ -151,7 +157,7 @@ app.post( '/api/sfpl', function( request, response ) {
 
 //Update a book
 app.put( '/api/books/:id', function( request, response ) {
-	console.log( 'Updating book ' + request.body.title );
+	console.log( 'Updating book ' + request.body.checked );
 	console.log(request.params.id)
 
 
@@ -179,6 +185,7 @@ app.put( '/api/books/:id', function( request, response ) {
 		});
 	});
 });
+
 
 //Delete a book
 app.delete( '/api/books/:id', function( request, response ) {
@@ -213,25 +220,23 @@ function addSFbook(sfbook, link, response){
 		available:true,
 		possessed: link
 	};
-}
-else{
-	tobook.checked = {
-	available:true,
-	possessed:"http://sfpl.org/"
-}
-}
+	}
+	else{
+		tobook.checked = {
+		available:true,
+		possessed:"http://sfpl.org/"
+	}
+	}
 
-tobook.releaseDate = '';
-tobook.author = '';
+	tobook.releaseDate = '';
+	tobook.author = '';
 
-if(bookob.pic.src){
-	tobook.coverImage = bookob.pic.src;
-}
-else{
-tobook.coverImage = '';
-}
-
-
+	if(bookob.pic.src){
+		tobook.coverImage = bookob.pic.src;
+	}
+	else{
+	tobook.coverImage = '';
+	}
 
 
 	var sfbook = new BookModel({
@@ -244,7 +249,8 @@ tobook.coverImage = '';
 		mailer: '',
 		checked: {
 			available:false,
-			possessed:link
+			possessed:link,
+			due: ''
 		}
 
 	});
