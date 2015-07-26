@@ -184,9 +184,9 @@ button.cancel{
   margin: 15px;
 }
 
-#filt label {
+.checkers label {
   display:block;
-  margin-top:10px
+  margin-top:10px;
 }
 
 .byer {

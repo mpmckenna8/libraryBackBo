@@ -20,7 +20,8 @@ app.LibraryView = Backbone.View.extend({
 		'click #sfplURL': 'liblink',
 		'click #retBook': 'returnB',
 		'change #sorter': 'sortIt',
-		'change #filt input':'filterIt'
+		'change #filt input':'filterIt',
+		'change #availFil': "filAvail"
 
 
 	},
@@ -101,17 +102,12 @@ app.LibraryView = Backbone.View.extend({
 			console.log(i)
 			console.log($(d).children('input'));
 			var iner = $(d).children('input')[0];
-			if(iner.value === "Available"){
-				console.log(iner.checked);
-				if(iner.checked){
-					$(".checkedOut").css("display", "none")
-				}
-				else{
-					$(".checkedOut").css("display", "inherit")
-				}
 
-			}
-			else if(iner.value === "sfpl"){
+			var isAvail = $("#availFil")[0].checked;
+
+
+
+		  if(iner.value === "sfpl"){
 				console.log('library books check')
 				if(iner.checked){
 						$('.sfplbook').css("display", "inherit");
@@ -122,19 +118,45 @@ app.LibraryView = Backbone.View.extend({
 			}
 			else if(iner.value === "cof"){
 				if(iner.checked){
+
+					if(!isAvail){
+
 					$('.checkedOut').css("display", "inherit");
 					$(".available").css("display", "inherit");
+				}
+				else{
+					$(".available").css("display", "inherit");
+
+				}
 				}
 				else{
 					$('.checkedOut').css("display", "none");
 					$(".available").css("display", "none");
 				}
 			}
+			else if(iner.value === "Available"){
+				console.log(iner.checked);
 
 
+			}
 
 
 		})
+
+
+	},
+	filAvail: function(){
+		// Need to do this one separate or I could have made sure it would be the last executed filter above
+		console.log($("#availFil"))
+		var isFilled = $("#availFil")[0].checked;
+
+		if(isFilled){
+			$(".checkedOut").css("display", "none")
+		}
+		else{
+			$(".checkedOut").css("display", "inherit")
+		}
+
 
 	}
 
