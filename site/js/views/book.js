@@ -25,6 +25,7 @@ app.BookView = Backbone.View.extend({
 	booksie: function(){
 
 	 return	this.model.toJSON()
+
 	},
 
 	deleteBook: function() {
@@ -214,7 +215,7 @@ console.log('for some reason bopper called')
 	},
 
 
-	checkit:checkout,
+	checkit: checkout,
 
 	checkO:function(){
 		console.log('checking out', this.model);
@@ -264,7 +265,11 @@ function checkout(){
 
 	var templ = _.template(this.checkTem);
 
-	this.$el.html(templ(toren)).css('width', "80%").css("height", "fit-content");
+	this.$el.html(templ(toren)).css('width', "80%").css("height", "fit-content").attr("name", toren.title)
+
+	console.log(this.$el[0].scrollIntoView())
+
+	this.$el.scrollTop(this.$el.scrollTop());
 
 
 

@@ -12,12 +12,16 @@ app.LibraryView = Backbone.View.extend({
 		this.listenTo( this.collection, 'add', this.renderBook );
 		this.listenTo( this.collection, 'reset', this.render );
 
+
 	},
 
 	events: {
 		'click #add': 'addBook',
 		'click #sfplURL': 'liblink',
-		'click #retBook': 'returnB'
+		'click #retBook': 'returnB',
+		'change #sorter': 'sortIt',
+		'change #filt input':'filterIt'
+
 
 	},
   // Right now I have the coverImage set to save to a urlDatq
@@ -27,6 +31,7 @@ app.LibraryView = Backbone.View.extend({
 
 	// render library by rendering each book in its collection
 	render: function() {
+
 		this.collection.each(function( item ) {
 			this.renderBook( item );
 
@@ -61,9 +66,81 @@ app.LibraryView = Backbone.View.extend({
 	},
 	returnB: app.octo.bookRet,
 
+	sortIt: function(){
+		this.collection.comparator = $("#sorter")[0].value;
+
+		this.collection.sort();
+		// the below will remove all of the view when all I want is the bookContainers.
+		//this.remove();
+	//	console.log((this.$el.children('.bookContainer').remove()))
+
+
+		if(this.collection.comparator){
+
+					this.clearAllBooks();
+					this.render();
+		}
+
+		console.log($("#sorter")[0].value)
+
+
+	},
+	clearAllBooks: function(){
+		this.$el.children('.bookContainer').remove()
+
+	},
+	filterIt: function(){
+
+		console.log('filtering from event!');
+		console.log($(this.$el.children("#tabs")[0]).find('#filt').children('label'));
+
+		var arrayLabs = $(this.$el.children("#tabs")[0]).find('#filt').children('label');
+
+
+		arrayLabs.each(function(i,d){
+			console.log(i)
+			console.log($(d).children('input'));
+			var iner = $(d).children('input')[0];
+			if(iner.value === "Available"){
+				console.log(iner.checked);
+				if(iner.checked){
+					$(".checkedOut").css("display", "none")
+				}
+				else{
+					$(".checkedOut").css("display", "inherit")
+				}
+
+			}
+			else if(iner.value === "sfpl"){
+				console.log('library books check')
+				if(iner.checked){
+						$('.sfplbook').css("display", "inherit");
+					}
+				else{
+					$(".sfplbook").css("display", "none");
+				}
+			}
+			else if(iner.value === "cof"){
+				if(iner.checked){
+					$('.checkedOut').css("display", "inherit");
+					$(".available").css("display", "inherit");
+				}
+				else{
+					$('.checkedOut').css("display", "none");
+					$(".available").css("display", "none");
+				}
+			}
+
+
+
+
+		})
+
+	}
+
 	});
 
-	
+
 
 
 $( document ).ajaxComplete(function() {

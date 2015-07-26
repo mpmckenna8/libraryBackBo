@@ -178,3 +178,21 @@ button.cancel{
   margin-right: -50%;
   transform: translate(-50%, -60%)
 }
+
+#tabs-4 div{
+  display: inline-flex;
+  margin: 15px;
+}
+
+#filt label {
+  display:block;
+  margin-top:10px
+}
+
+.byer {
+  margin: 10px;
+}
+
+#sorter{
+  margin-top:10px;
+}

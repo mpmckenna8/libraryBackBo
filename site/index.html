@@ -5,6 +5,7 @@
         <title>CoF Library</title>
         <link rel="stylesheet" href="css/screen.css">
         <link rel="stylesheet" href="js/lib/jquery-ui-1.11.4.custom/jquery-ui.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     </head>
     <body>
@@ -12,6 +13,11 @@
 
         <div id="tabs" >
         <ul>
+          <li id="filter">
+            <a href="#tabs-4"><h3 id="retbook"> Sort/filter </h3>
+
+            </a>
+          </li>
           <li id="adder">
             <a href="#tabs-1"><h3 id="abook">Add a new book </h3>
           </a>
@@ -31,14 +37,46 @@
 
         </ul>
 
-            <div id="tabs-1">
+        <!-- The divs for the tabs, not really in order but they render in the page in the order they are coded not by tab-# in the id of the main div -->
+        <div id="tabs-4">
+
+          <div>
+            <span class="byer"> Sort by:</span>
+            <select id="sorter">
+                <option value=''>None</option>
+                <option id='titSort' value="title">Title</option>
+            </select>
+          </div>
+
+
+          <div>
+            <span class="byer"> Filter books by:</span>
+            <span id="filt">
+            <label for="availFil">Show only available
+              <input type="checkbox" id="availFil" value="Available" />
+            </label>
+            <label for="cofFil">At Conservatory of Flowers:
+              <input type="checkbox" id="cofFil" value="cof" checked=true />
+            </label>
+            <label for="sfplFil">San Francisco Public Library:
+              <input type="checkbox" id="sfplFil" value="sfpl" checked=true/>
+            </label>
+            </span>
+          </div>
+
+        </div>
+
+
+        <div id="tabs-1">
 
               <div>
 
-                <label for="coverImage">
+                <label for="urlimager">
                   CoverImage:
-                </label>
+
                 <input id="urlimager" type="text" placeholder="URL for image (link)" ></input>
+
+                </label>
                    <label for="coverImage" >
                      or Add image from file:
                    </label>
@@ -95,7 +133,7 @@
 
 
       <script id="bookTemplate" type="text/template">
-      <a class=""
+      <a name="<%= title %>"
       href=<%if(checked.possessed == 'CoF'){ %> "#<%= title %>"  <% }else{  %>
         "#<%= checked.available %>" <% } %> >
 
@@ -105,7 +143,7 @@
          </div> </img>
 
       </a>
-        <ul>
+        <ul name="<%= title %>">
             <li><%= title %></li>
             <li><%= author %></li>
             <li><%=
@@ -130,8 +168,9 @@
 
 
     <script id="edTemplate" type="text/template">
+      <a name="<%= title %>"></a>
 
-    <span class="editing" name=<%= title %> >
+    <span class="editing" name="<%= title %>" >
           <img height=115 width=90 src="<%= coverImage %>"/>
       <div>
           <label for="tit">Title: </label><input id="tit" type="text" value="<%= title %>" >  </label>
