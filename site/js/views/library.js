@@ -1,13 +1,23 @@
 // this is where the view for the library will go.
 var app = app || {};
+var index;
+
+
+
 
 app.LibraryView = Backbone.View.extend({
 	el: $( '#books' ),
 
+
 	initialize: function() {
 		this.collection = new app.Library();
 		this.collection.fetch({reset:true});
+
 		this.render();
+
+		this.searchIndex();
+
+
 
 		this.listenTo( this.collection, 'add', this.renderBook );
 		this.listenTo( this.collection, 'reset', this.render );
@@ -32,6 +42,7 @@ app.LibraryView = Backbone.View.extend({
 
 	// render library by rendering each book in its collection
 	render: function() {
+		this.searchIndex();
 
 		this.collection.each(function( item ) {
 			this.renderBook( item );
@@ -158,7 +169,36 @@ app.LibraryView = Backbone.View.extend({
 		}
 
 
+	},
+
+	searchIndex:function(){
+
+		console.log('make an index', this.collection)
+
+		index = lunr(function () {
+			this.field('title', {boost: 10})
+			this.field('author')
+			this.ref('checked')
+		});
+
+		var idnum = 1;
+
+		this.collection.each(function(item){
+
+			var inbook = (item.toJSON());
+			index.add({
+
+				title: inbook.title,
+				author: inbook.author,
+				checked:idnum
+		})
+
+			idnum++
+
+		}, this)
+
 	}
+
 
 	});
 

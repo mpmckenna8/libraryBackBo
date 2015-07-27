@@ -1,13 +1,28 @@
 var app = app || {};
-
+var BookTem;
 $(function() {
+
+  $.get('templates/bookTemplate.js', function(data){
+    BookTem = data;
+
+    document.body.onload = function(){
+
+      new app.LibraryView();
+
+    }
+
+
+  }, 'html')
+
+
+
+  console.log($("#bookTemplate"));
 
   $("#tabs").tabs();
 
 
     $( '#releaseDate' ).datepicker();
 
-    new app.LibraryView();
 
     Backbone.emulateHTTP = false;
 

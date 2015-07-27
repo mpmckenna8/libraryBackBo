@@ -202,7 +202,7 @@ app.octo = {
 
 		var formData = {};
 
-		console.log($("#tabs-1").children())
+	//	console.log($("#tabs-1").children())
 
 		$( '#tabs-1' ).children( 'div' ).each( function( i, el ) {
 			console.log('get the childrens', $($(el).context).children('input'))
@@ -298,12 +298,12 @@ app.octo = {
 	},
   //where nowbook ends
   renBookClass:function(toren, that){
-    console.log('wha', that);
+//    console.log('wha', that);
     var toren = toren;
 
 
-    console.log(toren)
-    console.log(toren.checked.possessed.substr(0,12))
+//    console.log(toren)
+//    console.log(toren.checked.possessed.substr(0,12))
 
     		if(toren.checked.possessed.substr(0,12) === 'https://sfpl'){
     			that.$el.addClass('sfplbook')
@@ -318,7 +318,7 @@ app.octo = {
 
     			that.$el.addClass('available')
 
-    			console.log($($(that.$el.context.children).filter('a')).addClass('checkout'))
+    			$($(that.$el.context.children).filter('a')).addClass('checkout')
     		}
 
   },

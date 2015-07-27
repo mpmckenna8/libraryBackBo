@@ -28,6 +28,8 @@ app.Book = Backbone.Model.extend({
     console.log('getting a date from ', this)
     return 'doing dating';
 
+  },
+  addToIndex:function(){
 
   }
 });

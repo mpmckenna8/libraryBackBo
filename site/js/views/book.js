@@ -5,11 +5,11 @@ var app = app || {};
 app.BookView = Backbone.View.extend({
 	tagName: 'div',
 	className: 'bookContainer',
-	template: $( '#bookTemplate' ).html(),
+	// this used to be how to get the book template but I made it a global variable
+	//template: $( '#bookTemplate' ).html(),
 	eduTemplate: $( '#edTemplate').html(),
 	edPicTem: $('#edPic').html(),
 	checkTem: $("#checker").html(),
-
 
 
 	events: {
@@ -37,6 +37,7 @@ app.BookView = Backbone.View.extend({
 	},
 
 	render: function() {
+	//	console.log(BookTem)
 		//tmpl is a function that takes a JSON object and returns html
   //  console.log(this.model.toJSON(), 'to change')
   // don't work  console.log(app.Library.toJSON())
@@ -48,7 +49,7 @@ app.BookView = Backbone.View.extend({
 
   toren.releaseDate = new Date(toren.releaseDate *1).getFullYear();
 
-		var tmpl = _.template( this.template );
+		var tmpl = _.template( BookTem );
 
 		//this.el is what we defined in tagName. use $el to get access to jQuery html() function
 		this.$el.html( tmpl( toren ) );
@@ -267,9 +268,7 @@ function checkout(){
 
 	this.$el.html(templ(toren)).css('width', "80%").css("height", "fit-content").attr("name", toren.title)
 
-	console.log(this.$el[0].scrollIntoView())
-
-	this.$el.scrollTop(this.$el.scrollTop());
+	this.$el[0].scrollIntoView()
 
 
 
