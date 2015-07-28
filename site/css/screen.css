@@ -196,3 +196,21 @@ button.cancel{
 #sorter{
   margin-top:10px;
 }
+
+input[type="text"] {
+    height: 25px;
+    padding: 1px 6px 0 10px;
+    border: 1px solid #BBB;
+    float:left;
+    width:88.5%;
+    margin-left:25px;
+    display:inline-block;
+}
+.btnSearch {
+    position: relative;
+    padding: 5px;
+    cursor: pointer;
+    float: left;
+    margin-right:-15px;
+    display:inline-block;
+}
