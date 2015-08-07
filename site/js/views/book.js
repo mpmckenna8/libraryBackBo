@@ -255,6 +255,7 @@ console.log('for some reason bopper called')
 
 
 
+
 // These are just helper functions down here
 
 
@@ -269,7 +270,5 @@ function checkout(){
 	this.$el.html(templ(toren)).css('width', "80%").css("height", "fit-content").attr("name", toren.title)
 
 	this.$el[0].scrollIntoView()
-
-
 
 }

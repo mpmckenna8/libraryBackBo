@@ -86,15 +86,16 @@ h3 {
     clear: both;
 }
 
-#addBook div {
+#addBook > div {
     width: 200px;
+    display:flex-box;
 
 }
 
 
-#addBook div:after {
-    content: "";
-    display: block;
+#addBook div after {
+  //  content: "";
+  display: flex-box;
     height: 0;
     visibility: hidden;
     clear: both;
@@ -197,7 +198,7 @@ button.cancel{
   margin-top:10px;
 }
 
-input[type="text"] {
+.ui-toolbar input[type="text"] {
     height: 25px;
     padding: 1px 6px 0 10px;
     border: 1px solid #BBB;
@@ -213,4 +214,17 @@ input[type="text"] {
     float: left;
     margin-right:-15px;
     display:inline-block;
+}
+
+#searchResults{
+  background:red;
+  width:80%;
+  height:fit-content;
+  display:none;
+  margin-left:0;
+  padding:10px;
+}
+
+.ui-toolbar {
+
 }

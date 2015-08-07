@@ -15,7 +15,8 @@ app.LibraryView = Backbone.View.extend({
 
 		this.render();
 
-		this.searchIndex();
+
+	//	this.searchIndex();
 
 
 
@@ -31,7 +32,8 @@ app.LibraryView = Backbone.View.extend({
 		'click #retBook': 'returnB',
 		'change #sorter': 'sortIt',
 		'change #filt input':'filterIt',
-		'change #availFil': "filAvail"
+		'change #availFil': "filAvail",
+		'keyup .searchBox': "searchi"
 
 
 	},
@@ -57,6 +59,8 @@ app.LibraryView = Backbone.View.extend({
 		var bookView = new app.BookView({
 			model: item
 		});
+
+		console.log(bookView.el);
 		this.$el.append( bookView.render().el );
 	},
 
@@ -181,13 +185,12 @@ app.LibraryView = Backbone.View.extend({
 			this.ref('checked')
 		});
 
-		var idnum = 1;
+		var idnum = 0;
 
 		this.collection.each(function(item){
 
 			var inbook = (item.toJSON());
 			index.add({
-
 				title: inbook.title,
 				author: inbook.author,
 				checked:idnum
@@ -196,6 +199,100 @@ app.LibraryView = Backbone.View.extend({
 			idnum++
 
 		}, this)
+
+	},
+	searchi: function(){
+		//console.log($('.searchBox')[0].value)
+		var searchString = $('.searchBox')[0].value;
+		var showRes = $("#searchResults");
+
+		showRes.empty();
+		showRes.css('height', '200px')
+
+
+
+		var searchRes = index.search(searchString);
+
+		var noneFound = nullSearch();
+		var serbook = this.renderSearchBook;
+
+		console.log(searchRes)
+
+		console.log(index);
+		var colate = this.collection;
+		var collie = this.collection.toJSON();
+
+		if(searchRes.length > 0 ){
+			var searchedbook = searchRes[0].ref;
+			console.log(collie[searchedbook])
+			searchRes.forEach(function(d,i){
+		//		console.log(colate.where(collie[d.ref]))
+				serbook( colate.where(collie[d.ref])[0]);
+			});
+
+			var froCol =  this.collection.where(collie[searchedbook]);
+			console.log(froCol)
+
+		//	this.renderSearchBook(froCol[0]);
+
+
+		}
+		else{
+
+			console.log(showRes.children())
+			if(showRes.children().length < 1 ){
+				//	showRes.css('width', '88%');
+					showRes.append(noneFound);
+				}
+
+
+		}
+		if(searchString.length === 0){
+				showRes.css('display', 'none')
+		}
+		else{
+			showRes.css('display', 'inherit')
+			showRes.css('width', '88%')
+		//	showRes.css('height', '200px')
+		}
+
+	},
+
+	renderSearchBook: function(serBook){
+		var bookView = new app.BookView({
+			model: serBook
+		});
+
+
+
+		console.log(serBook);
+
+		bookView.$el.css('width', '80%').css('min-height', 100).css('height', 80);
+		var bookLink = bookView.$el;
+
+		var showRes = $("#searchResults");
+
+		bookView.$el.click(function(){
+			console.log('clicked a res')
+			console.log(serBook);
+			$("a[name='" + serBook.attributes.title +"']").click();
+
+		})
+		showRes.append( bookView.render().el );
+
+
+
+	(showRes.find('a').remove());
+
+	var hier = parseFloat(showRes.css('height').replace('px', '')) + 90;
+	var talSearch = hier + 'px';
+
+
+	$("#searchResults").css('height', talSearch);
+
+
+//	console.log(talSearch);
+
 
 	}
 
@@ -219,4 +316,8 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
   console.log('we can filesystem')
 } else {
   alert('The File APIs are not fully supported in this browser.');
+}
+
+function nullSearch(){
+	return "<div>Search did not return any results. Try something else. </div>"
 }

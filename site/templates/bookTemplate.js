@@ -1,8 +1,7 @@
 
 
       <a name="<%= title %>"
-      href=<%if(checked.possessed == 'CoF'){ %> "#<%= title %>"  <% }else{  %>
-        "#<%= checked.available %>" <% } %> >
+      href="#<%= title %>"  >
 
          <img height=115 width=90 src="<%= coverImage %>">
          <div class="inimg">

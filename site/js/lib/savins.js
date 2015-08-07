@@ -311,15 +311,15 @@ app.octo = {
     		else if ( toren.checked.possessed !== 'CoF'){
     			// this one wasn't much helpful
 
-    			that.$el.addClass('checkedOut')
+    			that.$el.addClass('checkedOut');
+
 
     		}
-    		else{
 
     			that.$el.addClass('available')
 
     			$($(that.$el.context.children).filter('a')).addClass('checkout')
-    		}
+
 
   },
 
