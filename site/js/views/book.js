@@ -39,7 +39,6 @@ app.BookView = Backbone.View.extend({
 	render: function() {
 	//	console.log(BookTem)
 		//tmpl is a function that takes a JSON object and returns html
-  //  console.log(this.model.toJSON(), 'to change')
   // don't work  console.log(app.Library.toJSON())
   //  console.log(this.template)
 
@@ -122,7 +121,6 @@ toren.words = toren.words.toString();
 	},
 	savePic: function(){
 
-
 		console.log(this.booksie());
 		var fitoload = document.getElementById("coverImage").files;
 
@@ -146,64 +144,58 @@ toren.words = toren.words.toString();
 		innies.each(hopper)
 
 
+		if(simpl){
+			this.model.set(pici);
+			Backbone.sync("update", this.model);
 
-	if(simpl){
+			this.cancelEd();
 
-		this.model.set(pici);
-
-		Backbone.sync("update", this.model);
-
-		this.cancelEd();
-
-
-	}
-
-	else{
-
-		app.octo.readit(pici, this);
-	}
-
-
-function hopper(i, d){
-	console.log(d)
-
-	var $d = $(d);
-
-	var valno = $d.val();
-	console.log(valno)
-	this.readit = this.readit
-
-	if(d.id =='picLink'){
-		if(valno){
-			console.log('almost changed the image')
-			pici = {coverImage: valno};
-
-// no access to the this.model from this function unless i when to the parent scope somehows.
-	//	this.model.set(covim);
 
 		}
 
-	}
-	else if (d.id =="filerP"){
-		console.log('in the file thing',  typeof valno)
-		if(valno){
+		else{
 
-			console.log('a file was found')
-			simpl = false;
+			app.octo.readit(pici, this);
+		}
 
-			console.log(this)
 
-			pici = this;
+		function hopper(i, d){
+			console.log(d)
+
+			var $d = $(d);
+
+			var valno = $d.val();
+			console.log(valno)
+			this.readit = this.readit
+
+			if(d.id =='picLink'){
+				if(valno){
+					console.log('almost changed the image')
+					pici = {coverImage: valno};
+
+		// no access to the this.model from this function unless i when to the parent scope somehows.
+			//	this.model.set(covim);
+
+				}
+
+			}
+			else if (d.id =="filerP"){
+				console.log('in the file thing',  typeof valno)
+				if(valno){
+
+					console.log('a file was found')
+					simpl = false;
+
+					console.log(this)
+
+					pici = this;
+
+				}
+			}
 
 		}
-	}
 
-}
-function bopper(dah, mod){
 
-console.log('for some reason bopper called')
-	//app.octo.readit(da,mod);
-}
 
 
 	},
@@ -255,7 +247,6 @@ console.log('for some reason bopper called')
 
 
 
-
 // These are just helper functions down here
 
 
@@ -264,10 +255,10 @@ function checkout(){
 
 	var toren = this.model.toJSON();
 
-
 	var templ = _.template(this.checkTem);
 
 	this.$el.html(templ(toren)).css('width', "80%").css("height", "fit-content").attr("name", toren.title)
+
 
 	this.$el[0].scrollIntoView()
 

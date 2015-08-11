@@ -59,8 +59,7 @@ app.LibraryView = Backbone.View.extend({
 		var bookView = new app.BookView({
 			model: item
 		});
-
-		console.log(bookView.el);
+	//	console.log(bookView.el);
 		this.$el.append( bookView.render().el );
 	},
 
@@ -290,14 +289,12 @@ app.LibraryView = Backbone.View.extend({
 
 	$("#searchResults").css('height', talSearch);
 
-
 //	console.log(talSearch);
 
+	},
 
-	}
 
-
-	});
+});
 
 
 
